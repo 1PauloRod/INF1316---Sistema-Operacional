@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int i;
+    int pid;
+    int base_pid = getpid();
+    int status; 
+    for(i=1; i<N; i++) {
+        if (getpid()==base_pid)
+        {
+            pid = fork();
+            printf("processo filho criado\n");
+        }
+
+        else
+            break;
+    }
+    if (getpid()==base_pid)
+        for(i=1; i<N; i++) {
+            printf("processo pai criado\n");
+            wait(-1, &status, 0);
+        }
+    else
+    {
+        printf("processo filho finalizado\n");
+        exit(0);
+    }
+    return 0; 
+}
+

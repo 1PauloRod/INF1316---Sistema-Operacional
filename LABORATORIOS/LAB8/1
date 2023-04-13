@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+
+
+
+int main(void)
+{
+    struct stat stats;
+    const char* main_directory = "so";
+    const char* directory_a;
+    const char* directory_b;
+    const char* directory_c;
+    const char* write_a = "o arquivo a foi escrito\n";
+    const char* write_b = "o arquivo b foi escrito\n";
+    const char* write_c = "o arquivo c foi escrito\n";
+    int create_directory;
+    int file_a, file_b, file_c;
+
+    mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+
+    //cria diretorio principal
+    create_directory = mkdir(main_directory, S_IRWXU);
+    if (create_directory == -1)
+    {
+        printf("Erro ao criar diretorio principal.\n");
+        exit(1);
+    }
+
+
+    //cria subdiretorios 
+
+    directory_a = "so/a";
+    create_directory = mkdir(directory_a, S_IRWXU);
+    if (create_directory == -1)
+    {
+        printf("Erro ao criar diretorio a.\n");
+        exit(1);
+    }
+
+      directory_b = "so/b";
+    create_directory = mkdir(directory_b, S_IRWXU);
+    if (create_directory == -1)
+    {
+        printf("Erro ao criar diretorio b.\n");
+        exit(1);
+    }
+
+    directory_c = "so/c";
+    create_directory = mkdir(directory_c, S_IRWXU);
+    if (create_directory == -1)
+    {
+        printf("Erro ao criar diretorio c.\n");
+        exit(1);
+    }
+      
+    //cria os arquivos
+
+    creat("so/a/arqa.txt", mode);
+    creat("so/b/arqb.txt", mode);
+    creat("so/c/arqc.txt", mode);
+
+    
+    //abre os arquivos
+
+    file_a = open("so/a/arqa.txt", O_RDWR);
+    file_b = open("so/a/arqb.txt", O_RDWR);
+    file_c = open("so/a/arqc.txt", O_RDWR);
+
+
+    //escreve nos arquivos
+
+    write(file_a, write_a, strlen(write_a));
+    write(file_b, write_b, strlen(write_b));
+    write(file_c, write_c, strlen(write_c));
+
+    
+    close(file_a);
+    close(file_b);
+    close(file_c);
+
+
+
+
+
+
+    return 0;
+}

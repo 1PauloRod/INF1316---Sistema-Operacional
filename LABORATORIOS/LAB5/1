@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
+
+int main(void)
+{
+    int msg;
+    int msgid = msgget(100, IPC_CREAT);
+    msgrcv(msgid, &msg, 512, 0, 0);
+    printf("msg recebida: %d\n", msg);
+    return 0;
+}

@@ -1,0 +1,66 @@
+#include <sys/shm.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define N 4
+#define TAM 4000
+
+int main()
+{
+    int n = 1;
+    int d = 0;    
+    int max = 0;
+    int segmento, status, j;
+    int *p;
+    // aloca a memória compartilhada
+    segmento = shmget(IPC_PRIVATE, TAM*sizeof (int), IPC_CREAT | S_IRUSR | S_IWUSR);
+    // associa a memória compartilhada ao processo
+    p = (int *) shmat(segmento, 0, 0); // comparar o retorno com -1
+    srand(time(NULL));
+    for (int i = 0; i < TAM; i++)
+        p[i] = rand() % 999;
+
+    /*for (int i = 0; i < TAM; i++)
+    {
+        if (p[i] > max)
+            max = p[i]; 
+    } 
+    printf("Valor maximo: %d\n", max); */
+    
+    for(int i=0;i<N;i++)
+    {
+        if(fork() == 0)
+        {
+            printf("***************processo %d criado***************\n", i+1);
+            for (j = d; j < 1000*n; j++)
+            {
+                if (p[j] > max)
+                {
+                    max = p[j];
+                    printf("Processo %d - PID:%d - Valor: %d\n", i+1, getpid(), p[j]);
+                    break;
+                }
+                /*else
+                    printf("Processo %d - PID:%d - Valor: %d\n", i+1, getpid(), p[j]);*/
+
+            }
+            exit(0);
+        }
+        d+=1000;
+        n+=1;
+    }
+    for(int i=0;i<N;i++)
+    {
+        printf("***************processo %d - PID: %d finalizado************\n", i+1, getpid());
+        waitpid(-1, &status, 0);
+    }
+    // libera a memória compartilhada do processo
+    shmdt (p);
+    // libera a memória compartilhada
+    shmctl (segmento, IPC_RMID, 0);
+    return 0;     
+}

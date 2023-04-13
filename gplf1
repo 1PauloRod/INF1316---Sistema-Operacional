@@ -1,0 +1,90 @@
+1.
+a) Modo kernel. O usuário não pode executar, pois, pode inibir as funçoes do sistema operacional, um problema crítico.
+
+b) Modo usuário. Nenhum problema, é apenas uma consulta, (não há problema)fazer um programa que executa e e exiba a data e a hora do sistema.
+
+c) Modo kernel. Pode afetar rotinas de contabilizaçao do sistema que utilizao a data e hora.
+
+d) Modo kernel. Problema grave em deixar o usuario mexer na fonte do programa, tem que apresentar de forma de interface grafica para o usuario.
+
+e) Modo usuario. (É o que mais fazemos quando programamos).
+
+f) Modo usuario.
+
+g) Modo kernel.
+
+
+2) Processo foreground pode receber input e interagir com entrada e saida padrao. E background roda indepe do usuario e nao precisa da interacao do usuario.
+(foreground(iniciado pelo usuario) tem interacao com o usuario e background nao(iniciado de outra forma, exemplo: antivirus, antihack)
+)
+
+3)Preemptivo - o sistema operacional pode interromper a execucao dele. Ele executa um processo, interrompido pelo sistema operacional e executa outro mais prioritario por exemplo.
+
+nao-preemptivo - Não há interrupcao. So ele mesmo csg se interromper.
+
+4) (No celular)
+
+
+5.
+a) acesso = 0
+   exclusao = 1
+   nleitores = 1
+   
+b) acesso = 0
+   exclusao = 1
+   nleitores = 1 
+   (nao mudaram)
+   
+semaforo de acesso
+
+c) nleitores = 2
+   acesso = 0
+   exclusao = 1
+
+d) O semaforo garante o acesso exclusivo de cada um, um vai csgr ter o acesso enquanto o outro espera. O semaforo protege a integridade dos dados.
+
+e) acesso = 0
+   nleitores = 0
+   exclusao = 1
+   
+f) exclusao = 0
+   acesso = 0
+   nleitores = 1
+   
+g) nao é possivel prever qual dos processos vai ter acesso a base. é um acesso randomico, depende do sistema operacional
+
+h) starvation (nao entrar). Sempre com leitura, o escritor nunca entra.
+
+7. 
+a) Tarefas por serem mais eficientes.
+
+b) Sim, se for usar processos era necessario o uso da memoria compartilhada. 
+
+c) Sim, o waitpid é um sinal que é usado em processos. E pthread_join é um sinal de threads. Mandam um sinal para o coordenador do programa.
+
+d) Sim. Para controlar a concorrencia dos processos/tarefas. 
+
+   
+f) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
